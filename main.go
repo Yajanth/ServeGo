@@ -12,16 +12,10 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/Yajanth/ServeGo.git/models"
+
 	"github.com/google/uuid"
 )
-
-type Response struct {
-	Status  string `json:"status"`
-	Message string `json:"message"`
-	TraceId string `json:"traceId"`
-	Path    string `json:"path"`
-	TS      string `json:"time"`
-}
 
 var (
 	alive atomic.Bool
@@ -106,7 +100,7 @@ func writeJson(w http.ResponseWriter, r *http.Request, code int, message string,
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(code)
 
-	resp := Response{
+	resp := models.Response{
 		Status:  status,
 		Message: message,
 		TraceId: uuid.NewString(),
